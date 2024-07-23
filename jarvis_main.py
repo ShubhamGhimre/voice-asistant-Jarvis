@@ -1,5 +1,8 @@
 import pyttsx3
 import speech_recognition 
+import requests
+import datetime
+from bs4 import BeautifulSoup
 
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
@@ -48,8 +51,8 @@ if __name__ == "__main__":
                 if "go to sleep" in query:
                     speak("Ok sir, you can call me anytime")
                     break
-            
-                
+                   
+                #greet automations 
                 elif "hello" in query:
                     speak("Hello sir, how are you ?")
                 
@@ -60,8 +63,18 @@ if __name__ == "__main__":
                     speak("Perfect sir")  
                 
                 elif "thank you" in query:
-                    speak("You're welcome sir")  
+                    speak("You're welcome sir") 
+                
+                #open close automations
+                elif "open" in query:
+                    from Dictapp import openappweb
+                    openappweb(query)
+                elif "close" in query:
+                    from Dictapp import closeappweb
+                    closeappweb(query)
+                     
                   
+                #search automations
                 elif "google" in query:
                     from SearchNow import searchGoogle
                     searchGoogle(query)
@@ -73,6 +86,39 @@ if __name__ == "__main__":
                 elif "wikipedia" in query:
                     from SearchNow import searchWikipedia
                     searchWikipedia(query)
+                    
+                #temperature automations 
+                elif "temperature" in query:
+                    search = "temperature in kathmandu"   
+                    url = f"https://www.google.com/search?q={search}" 
+                    r = requests.get(url)
+                    data = BeautifulSoup(r.text, "html.parser")
+                    temp = data.find("div", class_ ="BNeawe").text
+                    speak(f"current {search} is {temp}")
+                elif "weather" in query:
+                    search = "weather in kathmandu"   
+                    url = f"https://www.google.com/search?q={search}" 
+                    r = requests.get(url)
+                    data = BeautifulSoup(r.text, "html.parser")
+                    temp = data.find("div", class_ ="BNeawe").text
+                    speak(f"current {search} is {temp}")
+                    
+                elif "the time" in query:
+                    currentTime = datetime.datetime.now()
+                    strTime = currentTime.strftime("%I %M:%p")
+                    speak(f"Sir, the time is {strTime}")
+                   
+                #exit automations
+                elif "sleep jarvis" in query:
+                    speak("Ok sir, closing the program now")
+                    exit()
+ 
+                elif "finally sleep" in query:
+                    speak("Going to sleep sir!")
+                    exit()
+                    
+                    
+                                  
                 
         
         
