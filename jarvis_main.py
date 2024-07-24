@@ -3,6 +3,7 @@ import speech_recognition
 import requests
 import datetime
 from bs4 import BeautifulSoup
+import os
 
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
@@ -38,6 +39,12 @@ def takeCommand():
         return "None"
     return query
 
+def alarm(query):
+    timehere = open("AlarmText.txt","a")
+    timehere.write(query)
+    timehere.close()
+    os.startfile("alarm.py")
+    
 if __name__ == "__main__":
     while True:
         query = takeCommand().lower()
@@ -107,6 +114,15 @@ if __name__ == "__main__":
                     currentTime = datetime.datetime.now()
                     strTime = currentTime.strftime("%I %M:%p")
                     speak(f"Sir, the time is {strTime}")
+                
+                #alarm automations
+                elif "set an alarm" in query:
+                    print("Please tell me the time to set the alarm example : 10 and 10 and 10")
+                    speak("set the time")
+                    a = input("Enter the time :-  ")
+                    alarm(a)
+                    speak("Alarm set successfully")   
+                  
                    
                 #exit automations
                 elif "sleep jarvis" in query:
