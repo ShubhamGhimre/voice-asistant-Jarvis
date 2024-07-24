@@ -4,6 +4,7 @@ import requests
 import datetime
 from bs4 import BeautifulSoup
 import os
+import pyautogui
 
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
@@ -71,6 +72,25 @@ if __name__ == "__main__":
                 
                 elif "thank you" in query:
                     speak("You're welcome sir") 
+                    
+                elif "pause" in query:
+                    pyautogui.press("k")
+                    speak("video paused")
+                elif "play" in query:
+                    pyautogui.press("k")
+                    speak("video played")
+                elif "mute" in query:
+                    pyautogui.press("m")
+                    speak("video muted")
+
+                elif "volume up" in query:
+                    from keyboard import volumeup
+                    speak("Turning volume up,sir")
+                    volumeup()
+                elif "volume down" in query:
+                    from keyboard import volumedown
+                    speak("Turning volume down, sir")
+                    volumedown()
                 
                 #open close automations
                 elif "open" in query:
