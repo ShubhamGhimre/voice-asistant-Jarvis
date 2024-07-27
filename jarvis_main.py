@@ -153,6 +153,22 @@ if __name__ == "__main__":
                     speak("Going to sleep sir!")
                     exit()
                     
+                elif "remember that" in query:
+                    rememberMessage = query.replace("remember that"," ")
+                    rememberMessage = query.replace("jarvis"," ")
+                    speak("You asked me to "+rememberMessage)
+                    # print(rememberMessage)
+                    remember = open("Remember.txt","w")
+                    remember.write(rememberMessage)
+                    remember.close()
+                elif "what do you remember " in query:
+                    remember = open("Remember.txt","r")
+                    # print(remember.read())
+                    speak("You asked me to"+remember.read())
+                
+                    
+                    
+                    
                     
                                   
                 
