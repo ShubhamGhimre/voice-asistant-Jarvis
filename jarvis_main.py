@@ -5,6 +5,8 @@ import datetime
 from bs4 import BeautifulSoup
 import os
 import pyautogui
+import random
+import webbrowser
 
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
@@ -72,6 +74,17 @@ if __name__ == "__main__":
                 
                 elif "thank you" in query:
                     speak("You're welcome sir") 
+                
+                elif "tired" in query:
+                    speak("playing your favourite songs, sir")
+                    a = (1,2,3)
+                    b = random.choice(a)
+                    if b==1:
+                        webbrowser.open("https://www.youtube.com/watch?v=K-w04FG6eyI")
+                    if b==2:
+                        webbrowser.open("https://www.youtube.com/watch?v=gJLVTKhTnog")
+                    if c==3:
+                        webbrowser.open("https://www.youtube.com/watch?v=-i0rH3z-DzA")
                     
                 elif "pause" in query:
                     pyautogui.press("k")
@@ -91,6 +104,7 @@ if __name__ == "__main__":
                     from keyboard import volumedown
                     speak("Turning volume down, sir")
                     volumedown()
+                    
                 
                 #open close automations
                 elif "open" in query:
